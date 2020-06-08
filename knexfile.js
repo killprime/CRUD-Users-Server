@@ -4,11 +4,11 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgres://postgres:123456@localhost/my_crud_db'
+    connection: 'postgres://postgresql-infinite-76257'
   },
   test: {
     client: 'pg',
-    connection: 'postgres://postgres:123456@localhost/test_my_crud_db'
+    connection: 'postgres://test_my_crud_db'
   },
 
 };
