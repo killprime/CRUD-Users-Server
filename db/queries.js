@@ -1,15 +1,15 @@
 const knex = require('./knex'); //connection
 
 module.exports = {
-  getAll(){
-    return knex('users');
+  getAll(perPage, currentPage){
+    return knex('users').paginate({ perPage, currentPage, isLengthAwareL: true });
   },
   getOne(id){
     return knex('users').where('id', id).first();
   },
   create(user){
 
-    return result = knex('users').insert(user, 'id');
+    return knex('users').insert(user, 'id');
   },
   update(id, user){
     return knex('users').where('id', id).returning('*').update(user);
