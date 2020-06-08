@@ -15,6 +15,27 @@ function validUser(user){
   return hasFio && hasTel;
 }
 
+function validUserMiddleware(req, res, next) {
+  if(validUser(req.body)) {
+    next();
+  } else {
+    const error = new Error('Invalid product');
+    next(error);
+  }
+}
+
+function getUserFromBody(body) {
+  const { fio, tel } = body;
+  // insert into the DB
+  const user = {
+    fio,
+    tel
+  };
+
+  return user;
+}
+
+
 router.get('/', (req, res) => {
   queries.getAll().then(users => {
     res.json(users);
@@ -31,7 +52,7 @@ router.get('/:id', isValidId, (req, res, next) => {
   });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', validUserMiddleware, (req, res, next) => {
   if(validUser(req.body)){
     queries.create(req.body).then(users => {
       res.json(users[0]);
@@ -41,7 +62,7 @@ router.post('/', (req, res, next) => {
   }
 });
 
-router.put('/:id', isValidId, (req, res, next) => {
+router.put('/:id', isValidId, validUserMiddleware, (req, res, next) => {
   if(validUser(req.body)){
     //update the user
     queries.update(req.params.id, req.body).then(users => {
