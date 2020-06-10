@@ -15,12 +15,12 @@ Connection settings in the file - .env
 
 ## Run migrations
 
-`knex migrate:latest`
+`$ knex migrate:latest`
 
 
 ## Run seeds
 
-`knex seed:run`
+`$ knex seed:run`
 
 ## Run app
 
