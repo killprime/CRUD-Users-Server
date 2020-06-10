@@ -1,8 +1,15 @@
 const knex = require('./knex'); //connection
 
 module.exports = {
-  getAll(perPage, currentPage){
-    return knex('users').paginate({ perPage, currentPage, isLengthAwareL: true });
+  getAll(pageSize, pageNumber){
+    const options = {
+      perPage: pageSize,
+      currentPage: pageNumber,
+      isFromStart: false,
+      isLengthAwareL: true
+    }
+    console.log(options);
+    return knex('users').paginate(options);
   },
   getOne(id){
     return knex('users').where('id', id).first();

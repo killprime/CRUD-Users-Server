@@ -38,10 +38,10 @@ function getUserFromBody(body) {
 
 router.get('/', (req, res) => {
 
-  const perPage = (req.query.hasOwnProperty("perpage")) ? req.query.perpage : 5;
-  const currentPage = (req.query.hasOwnProperty("currentPage")) ? req.query.currentPage : 1;
+  const pageSize = (req.query.hasOwnProperty("pageSize")) ? parseInt(req.query.pageSize) : 5;
+  const pageNumber = (req.query.hasOwnProperty("pageNumber")) ? parseInt(req.query.pageNumber) : 1;
 
-  queries.getAll(perPage, currentPage).then(users => {
+  queries.getAll(pageSize, pageNumber).then(users => {
     res.json(users);
   });
 });
