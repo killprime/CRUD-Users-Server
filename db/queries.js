@@ -8,7 +8,6 @@ module.exports = {
       isFromStart: false,
       isLengthAwareL: true
     }
-    console.log(options);
     return knex('users').paginate(options);
   },
   getOne(id){
